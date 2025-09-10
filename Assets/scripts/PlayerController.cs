@@ -24,7 +24,12 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(direction * speed * Time.deltaTime);
 
+    }
+    
+    //funcion especial que se ejecuta cuando se toca a otro objeto que tiene un collider en modo //trigger
+    private void OntriggerEnter2D(Collider2D other)
+    {
 
-
+        
     }
 }
