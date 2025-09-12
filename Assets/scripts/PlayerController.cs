@@ -1,10 +1,10 @@
-using System.Security.Cryptography;
-using System.Threading;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f; //variable para guardar la velocidad
+    public int score = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,9 +27,21 @@ public class PlayerController : MonoBehaviour
     }
     
     //funcion especial que se ejecuta cuando se toca a otro objeto que tiene un collider en modo //trigger
-    private void OntriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        //Debug.Print("prueba");
+        if (other.CompareTag("collectable"))
+        {
+            score = score + 1;
 
-        
+            Destroy(other.gameObject);
+            Debug.Log("Collected!!!");
+            Debug.Log("Score: " + score);
+        }
+
+        if (score >= 3)
+        {
+            Debug.Log("Has Ganado!!!");
+        }
     }
 }
