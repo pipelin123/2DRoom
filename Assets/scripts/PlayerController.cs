@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using TMPro; //libreria para usar textos
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,11 +8,14 @@ public class PlayerController : MonoBehaviour
     public int score = 0;
     public bool hasKey = false;
     public bool hasWater = false;
+    public TextMeshProUGUI textScore;
+    public TextMeshProUGUI textNotification;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        UpdateTextScore();
+        UpdateTextNotification();
     }
 
     // Update is called once per frame
@@ -35,21 +39,24 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("collectable"))
         {
             score = score + 1;
+            UpdateTextScore();
 
             Destroy(other.gameObject);
             Debug.Log("Collected!!!");
             Debug.Log("Score: " + score);
+
         }
         if (other.CompareTag("Key"))
         {
             hasKey = true;
             Debug.Log("has recolectado la llave!");
             Destroy(other.gameObject);
+            UpdateTextNotification();
         }
         if (other.CompareTag("Water"))
         {
             hasWater = true;
-            Debug.Log("has tocado el agua y no puedes ganas!");
+            Debug.Log("has recolectado la llave!");
             Destroy(gameObject);
         }
         
@@ -58,6 +65,19 @@ public class PlayerController : MonoBehaviour
         if (score >= 3 || hasKey && !hasWater)  //solo en un booleano si se pregunta sin nada es verdadero, y con un signo de admiracion al principio es falso
         {
             Debug.Log("Has ganado. Tienes suficientes puntos, la llave y no has tocado el agua");
+            UpdateTextNotification();
         }
     }
-}
+
+    void UpdateTextScore()
+    {
+        textScore.text = "Score: " + score;
+    }
+
+    void UpdateTextNotification()
+    {
+        textNotification.text = "has recolectado la llave!" + hasKey;
+        textNotification.text = "Has ganado. Tienes suficientes puntos, la llave y no has tocado el agua" + hasWater;
+    }    
+}   
+
