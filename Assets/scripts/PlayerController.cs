@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         UpdateTextScore();
-        UpdateTextNotification();
     }
 
     // Update is called once per frame
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour
             hasKey = true;
             Debug.Log("has recolectado la llave!");
             Destroy(other.gameObject);
-            UpdateTextNotification();
         }
         if (other.CompareTag("Water"))
         {
@@ -65,7 +63,6 @@ public class PlayerController : MonoBehaviour
         if (score >= 3 || hasKey && !hasWater)  //solo en un booleano si se pregunta sin nada es verdadero, y con un signo de admiracion al principio es falso
         {
             Debug.Log("Has ganado. Tienes suficientes puntos, la llave y no has tocado el agua");
-            UpdateTextNotification();
         }
     }
 
@@ -73,11 +70,5 @@ public class PlayerController : MonoBehaviour
     {
         textScore.text = "Score: " + score;
     }
-
-    void UpdateTextNotification()
-    {
-        textNotification.text = "has recolectado la llave!" + hasKey;
-        textNotification.text = "Has ganado. Tienes suficientes puntos, la llave y no has tocado el agua" + hasWater;
-    }    
 }   
 
